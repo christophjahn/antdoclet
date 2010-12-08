@@ -20,7 +20,13 @@
  */
 package com.neuroning.antdoclet;
 
-import java.util.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import com.sun.javadoc.ClassDoc;
 import com.sun.javadoc.RootDoc;
@@ -41,9 +47,18 @@ public class AntRoot {
     private RootDoc rootDoc;
     private SortedSet all, allTypes, allTasks;
     private SortedSet categories;
+    private File tasksLibFile = null;
+    private File tasksCategoryFile = null;
     
-    public AntRoot(RootDoc rootDoc) {
+    
+    
+  
+    public AntRoot(RootDoc rootDoc, File tasksLibFile, File tasksCategoryFile) {
         this.rootDoc = rootDoc;
+        
+        this.tasksLibFile = tasksLibFile;
+        this.tasksCategoryFile = tasksCategoryFile;
+        
         all = new TreeSet();
         allTypes = new TreeSet();
         allTasks = new TreeSet();
@@ -54,6 +69,8 @@ public class AntRoot {
             
             AntDoc d = AntDoc.getInstance(classes[i].qualifiedName(), this.rootDoc);
             if(d != null) {
+            	d.setTasksLibFile(tasksLibFile);
+            	d.setTasksCategoryFile(tasksCategoryFile);
                 all.add(d);
                 if(d.getAntCategory() != null)
                     categories.add(d.getAntCategory());

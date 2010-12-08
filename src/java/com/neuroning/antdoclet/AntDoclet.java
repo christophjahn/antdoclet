@@ -39,6 +39,10 @@ import com.sun.javadoc.RootDoc;
  */
 public class AntDoclet extends com.sun.javadoc.Doclet {
 
+	
+	protected static final String OPTION_TASKSLIBFILE = "-taskslibfile";
+	protected static final String OPTION_TASKSCATEGORYFILE = "-taskscategoryfile";
+	
     /**
      * Processes the JavaDoc documentation.
      * 
@@ -53,6 +57,8 @@ public class AntDoclet extends com.sun.javadoc.Doclet {
         String[] templates = null;
         String templatesDir = ".";
         String[] outputdirs = new String[] { "."};
+        File tasksLibFile = null;
+        File tasksCategoryFile = null;
 
         String[][] options = root.options();
         for (int opt = 0; opt < options.length; opt++) {
@@ -65,7 +71,10 @@ public class AntDoclet extends com.sun.javadoc.Doclet {
                 templatesDir = options[opt][1]; // comma-separated filenames
             } else if (options[opt][0].equalsIgnoreCase("-d")) {
                 outputdirs = options[opt][1].split(",");
-            }
+            } else if (options[opt][0].equalsIgnoreCase(OPTION_TASKSLIBFILE)) 
+                tasksLibFile = new File(options[opt][1]);
+            else if (options[opt][0].equalsIgnoreCase(OPTION_TASKSCATEGORYFILE)) 
+                tasksCategoryFile = new File(options[opt][1]);
         }
 
         // Init Velocity-template Generator
@@ -79,7 +88,7 @@ public class AntDoclet extends com.sun.javadoc.Doclet {
         // Set global parameters to the templates
         velocity.setAttribute("velocity", velocity);
         velocity.setAttribute("title", title);
-        velocity.setAttribute("antroot", new AntRoot(root));
+       	velocity.setAttribute("antroot", new AntRoot(root,tasksLibFile,tasksCategoryFile));
 
         for (int i = 0; i < templates.length; i++) {
             try {
@@ -117,6 +126,10 @@ public class AntDoclet extends com.sun.javadoc.Doclet {
         else if (option.equalsIgnoreCase("-templatesdir"))
             return 2;
         else if (option.equalsIgnoreCase("-d"))
+            return 2;
+        else if (option.equalsIgnoreCase(OPTION_TASKSLIBFILE))
+            return 2;
+        else if (option.equalsIgnoreCase(OPTION_TASKSCATEGORYFILE))
             return 2;
 
         return 0;
