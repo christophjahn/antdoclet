@@ -45,6 +45,37 @@ AntDoclet expects some ant-specific tags to build richer documentation:
   documentation. This is useful for ignoring abstract classes or
   tasks/types that are not to be exposed in the docs.
 
+* Additional tag: Filter out attributes that were manually tagged for removal.
+	Often a class (task) extends another by already
+	setting some of the attributes of its superclass. In that
+	it its usually not desirable that those attributes are
+	"manually" changed to some other value. Hence they should
+	not be listed in the documentation (although technically
+	they can be changed!).
+	
+		@ant.attribute.ignore TO_BE_IGNORED_ATTRIBUTE_NAME
+
+ * Additional tag: Filter out nested elements that were manually tagged for removal.
+	Often a class (task) extends another. Hence some or all
+	of the normally legitimate nested elements should
+	not be listed in the documentation.
+		
+		@ant.nested.ignore ELEMENT_NAME
+
+
+* Additional parameter for calling Javadoc:
+	Task names are already defined in the tasks' lib file.
+	This paramter triggers the automatic scanning and hence	makes it unnecessary 
+	to provide the name using the @ant.{task|type} tag
+	
+		-taskslibfile
+	
+* Additional parameter for calling Javadoc:
+	Java package gets mapped to a task category
+  				
+		-taskscategoryfile 
+	
+
 * The tasks/types properties documentation is extracted from the
   properties setter/getter methods' comments (the setter comment has
   precedence). Two additional tags are accepted here:
