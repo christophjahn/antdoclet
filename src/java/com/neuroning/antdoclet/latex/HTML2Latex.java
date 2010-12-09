@@ -399,7 +399,7 @@ public class HTML2Latex extends HTMLEditorKit.ParserCallback {
                     i++;
                 }
                 break;
-            case 'æ':
+/*            case 'æ':
                 if (i < str.length() - 1 && str.charAt(i + 1) == ' ') {
                     ret.append("\\ae\\ ");
                     i++;
@@ -447,7 +447,7 @@ public class HTML2Latex extends HTMLEditorKit.ParserCallback {
                     ret.append("\\O ");
                 }
                 break;
-            case '^':
+  */          case '^':
                 ret.append("$\\wedge$");
                 break;
             case '<':
