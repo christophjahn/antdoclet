@@ -12,16 +12,21 @@ Tasks.
 	<!-- Directory locations =====  -->
 	<property name="build.home" value="build" />
 	<property name="src.home" value="src/java" />
+	<!-- configure your ant location for build -->
+	<property name="ant.home" value="apache-ant-1.7.1" />
 	<property name="lib.home" value="lib" />
 	<property name="dist.home" value="dist" />
 	<property name="root.home" value="root" />
 	<property name="templates.home" value="templates" />
 
-	<property name="dist.name" value="antdoclet-1.1" />
+	<property name="dist.name" value="antdoclet-1.1.cj" />
 
 
 	<!-- Compilation Classpath ===== -->
 	<path id="compile.classpath">
+		<fileset id="ant" dir="${ant.home}">
+			<include name="**/*.jar" />
+		</fileset>
 		<fileset id="libs" dir="${lib.home}">
 			<include name="**/*.jar" />
 		</fileset>
