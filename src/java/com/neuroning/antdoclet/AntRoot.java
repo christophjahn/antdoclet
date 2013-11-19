@@ -69,8 +69,12 @@ public class AntRoot {
             
             AntDoc d = AntDoc.getInstance(classes[i].qualifiedName(), this.rootDoc);
             if(d != null) {
-            	d.setTasksLibFile(tasksLibFile);
-            	d.setTasksCategoryFile(tasksCategoryFile);
+		if (tasksLibFile != null) {
+            		d.setTasksLibFile(tasksLibFile);
+		}
+		if (tasksCategoryFile != null) {
+	            	d.setTasksCategoryFile(tasksCategoryFile);
+		}
                 all.add(d);
                 if(d.getAntCategory() != null)
                     categories.add(d.getAntCategory());
