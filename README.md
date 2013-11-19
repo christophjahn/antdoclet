@@ -68,13 +68,23 @@ AntDoclet expects some ant-specific tags to build richer documentation:
 	This paramter triggers the automatic scanning and hence	makes it unnecessary 
 	to provide the name using the @ant.{task|type} tag
 	
-		-taskslibfile
+		-taskslibfile FILE_NAME
 	
 * Additional parameter for calling Javadoc:
 	Java package gets mapped to a task category
   				
-		-taskscategoryfile 
-	
+		-taskscategoryfile FILE_NAME
+
+        For example:
+```xml
+        <?xml version="1.0"?>
+        <antlib>
+          <category name="Comp1" package="com.acme.framework.comp1" />
+          <category name="App1" package="com.acme.app1" />
+        </antlib>
+```
+
+        You can store the category tags in the taskslibfile.
 
 * The tasks/types properties documentation is extracted from the
   properties setter/getter methods' comments (the setter comment has
