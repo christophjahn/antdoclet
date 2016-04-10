@@ -1,9 +1,11 @@
-<project name="antdoclet" default="dist" basedir=".">
+<project name="antdoclet-kk-1.2" default="dist" basedir=".">
 
 	<description>
-This is the main build script for AntDoclet, a tool to automatically
+This is the main build script for [AntDoclet](https://github.com/dobladez/antdoclet), a tool to automatically
 generate documentation for your custom [Ant](http://ant.apache.org)
 Tasks.
+
+This version has been enhanced by [Christoph Jahn](https://github.com/christophjahn/antdoclet) witth bug fix contributions by [Kaj Kandler](https://github.com/KajKandler/antdoclet)
 	</description>
 
 	<!-- Property Definitions ====== -->
@@ -12,16 +14,21 @@ Tasks.
 	<!-- Directory locations =====  -->
 	<property name="build.home" value="build" />
 	<property name="src.home" value="src/java" />
+	<!-- configure your ant location for build -->
+	<property name="ant.home" value="apache-ant-1.7.1" />
 	<property name="lib.home" value="lib" />
 	<property name="dist.home" value="dist" />
 	<property name="root.home" value="root" />
 	<property name="templates.home" value="templates" />
 
-	<property name="dist.name" value="antdoclet-1.1" />
+	<property name="dist.name" value="antdoclet-kk-1.2" />
 
 
 	<!-- Compilation Classpath ===== -->
 	<path id="compile.classpath">
+		<fileset id="ant" dir="${ant.home}">
+			<include name="**/*.jar" />
+		</fileset>
 		<fileset id="libs" dir="${lib.home}">
 			<include name="**/*.jar" />
 		</fileset>
@@ -117,7 +124,7 @@ Tasks.
 		<mkdir dir="${srcdist.target}" />
 
 		<copy todir="${srcdist.target}">
-			<fileset dir="${basedir}" >
+			<fileset dir="${basedir}/src" >
 				<exclude name="${dist.home}*/**"/>
 				<exclude name="fuego*/**"/>
 			</fileset>
